@@ -2,17 +2,24 @@ var pricingModel = require('../models/PricingModel');
 
 module.exports = {
   findAllPricings: async () => {
-    let result = await pricingModel.findAll(
-      {
-        order: [['price', 'ASC']]
-      }
-    );
-    var pricingList = result.map(pricingItem => pricingItem.dataValues);
-    return pricingList;
+    try {
+      let result = await pricingModel.findAll(
+        {
+          order: [['price', 'ASC']]
+        }
+      );
+      var pricingList = result.map(pricingItem => pricingItem.dataValues);
+      return pricingList;
+    } catch (error) {
+      console.error(`#PricingRepository :: #findAllPricings :: 
+        Error :: ${error}`);
+      throw error;
+    }
   },
 
   findOnePricingByPrice: async (price) => {
-    var result = await pricingModel.findOne(
+    try {
+      var result = await pricingModel.findOne(
         {
           where: {
             price: price
@@ -22,5 +29,11 @@ module.exports = {
       );
       if (result === null) return null;
       return result.dataValues;
+    } catch (error) {
+      console.error(`#PricingRepository :: #findOnePricingByPrice ::
+        price: ${price} :: 
+        Error :: ${error}`);
+      throw error;
+    }
   }
 }

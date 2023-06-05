@@ -12,7 +12,8 @@ module.exports = {
       var userList = result.map(userItem => userItem.dataValues);
       return userList;
     } catch (error) {
-      console.error('findAllUsers failed:', error);
+      console.error(`#UserRepository :: #findAllUsers :: 
+        Error :: ${error}`);
       throw error;
     }
   },
@@ -34,7 +35,9 @@ module.exports = {
       if (result === null) return null;
       return result.dataValues;
     } catch (error) {
-      console.error('findOneUserByPhoneNumber failed:', error);
+      console.error(`#UserRepository :: #findOneUserByPhoneNumber ::
+        phoneNumber: ${phoneNumber} :: 
+        Error :: ${error}`);
       throw error;
     }
   },
@@ -49,7 +52,9 @@ module.exports = {
         }
       );
     } catch (error) {
-      console.error('createOneUser failed:', error);
+      console.error(`#UserRepository :: #createOneUser ::
+        username: ${username} :: 
+        Error :: ${error}`);
       throw error;
     }
   },
@@ -67,7 +72,9 @@ module.exports = {
         }
       );
     } catch (error) {
-      console.error('updatePhoneNumberByUsername failed:', error);
+      console.error(`#UserRepository :: #updatePhoneNumberByUsername ::
+        phoneNumber: ${phoneNumber} :: username: ${username} :: 
+        Error :: ${error}`);
       throw error;
     }
   },
@@ -110,7 +117,9 @@ module.exports = {
 
       await userModel.sequelize.query(sqlQuery);
     } catch (error) {
-      console.error('updateUserByPhoneNumberAndExtendedMonth failed:', error);
+      console.error(`#UserRepository :: #updateUserByPhoneNumberAndExtendedMonth ::
+        updatedUsers: ${updatedUsers} :: 
+        Error :: ${error}`);
       throw error;
     }
   }
